@@ -6,10 +6,12 @@ const  main = async () => {
     console.log('adresse owner: ', owner.address)
 
     const tokenDeploy = await Token.deploy()
-    console.log('adresse contrat: ',tokenDeploy.address)
     
     const testFunction = await tokenDeploy.getBalance(owner.address)
     console.log('adresse balance: ',testFunction.toString())
+    
+    await tokenDeploy.deployed()
+    console.log('adresse contrat: ',tokenDeploy.address)
 }
 
 main().then(()=>process.exit(0))
