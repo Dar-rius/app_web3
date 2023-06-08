@@ -13,7 +13,6 @@ function App() {
 
  
   const getSolde = async() => {
-    if(typeof window.ethereum !== 'undefined'){
       const provider = new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545')
       const owner =  provider.getSigner()
       const contract =  new ethers.Contract(contractAddress, TokenABI.abi, owner)
@@ -21,13 +20,9 @@ function App() {
       const solde = await contract.getBalance(addressUser)
       const soldeTrue = Number(solde)
       setBalance(soldeTrue)
-    } else {
-      await window.ethereum.request({method: 'eth_requestAccounts'})
-    }
   }
 
   const transfertToken = async() =>{
-    if (window.ethereum !== 'undefined'){
       const provider =  new ethers.providers.JsonRpcProvider('http://127.0.0.1:8545')
       const signer = provider.getSigner()
       const contract = new ethers.Contract(contractAddress, TokenABI.abi, signer)
@@ -35,9 +30,6 @@ function App() {
       setAdresse('')
       setCount(0)
       transaction.wait()
-    } else {
-      await window.ethereum.request({method:'eth_requestAccounts'})
-    }
   }
 
   return (
